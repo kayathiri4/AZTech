@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style.css';
-import Login from './Login';
+import React from "react";
+import ReactDOM from "react-dom";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
+
+import "assets/scss/material-kit-react.scss?v=1.10.0";
+
+// pages for this product
+// import Components from "views/Components/Components.js";
+import LandingPage from "views/LandingPage/LandingPage.js";
+import LoginPage from "views/LoginPage/LoginPage.js";
+import ApplicationPage from "views/application/application.js";
+
+var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <div className="g-signin">
-      <Login />
-    </div>
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Router history={hist}>
+    <Switch>
+      <Route path="/landing-page" component={LandingPage} />
+      <Route path="/login-page" component={LoginPage} />
+      <Route path="/app-page" component={ApplicationPage} />
+      <Route path="/" component={LandingPage} />
+    </Switch>
+  </Router>,
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
