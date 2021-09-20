@@ -27,6 +27,8 @@ function Login() {
   const clientId = "762293579403-97l40lc1o04losrmhqif405jnkkhnugd.apps.googleusercontent.com";
   return (
     <div>
+
+      <h1>Welocme to my page</h1>
       { showLogin &&
         <GoogleLogin
           clientId={clientId}
