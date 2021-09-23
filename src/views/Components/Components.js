@@ -34,14 +34,16 @@ const useStyles = makeStyles(styles);
 
 export default function Components(props) {
   const classes = useStyles();
-  const { name, ...rest } = props;
+  const { clientId, response, ...rest } = props;
   return (
     <div>
 
 
       <div className={classNames(classes.main, classes.mainRaised)} style={{"margin-top": "10px"}}>
         <SectionBasics
-        name = {name} />
+        clientId = {clientId} 
+        response = {response}
+        />
         {/* <SectionNavbars /> */}
         {/* <SectionTabs /> */}
         {/* <SectionPills /> */}

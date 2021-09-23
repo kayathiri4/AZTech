@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 // plugin that creates slider
 import Slider from "nouislider";
 // @material-ui/core components
@@ -26,71 +26,22 @@ import styles from "assets/jss/material-kit-react/views/componentsSections/basic
 
 const useStyles = makeStyles(styles);
 
-export default function SectionBasics() {
+export default function SectionBasics(props) {
   const classes = useStyles();
+  const { clientId, response, ...rest } = props;
+
   const [checked, setChecked] = React.useState([24, 22]);
   const [selectedEnabled, setSelectedEnabled] = React.useState("b");
   const [checkedA, setCheckedA] = React.useState(true);
   const [checkedB, setCheckedB] = React.useState(false);
+  const [packages, setPackages] = React.useState(undefined);
+  const parcels = { 0: "subs"}
 
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const name = event.target.elements.name.value;
-    const salary = event.target.elements.salary.value;
-    const age = event.target.elements.age.value;
-
-    const data = {"name":name,"salary": salary,"age": age}
-    
-    fetch('http://dummy.restapiexample.com/api/v1/create', {
-        method: 'POST',
-        // We convert the React state to JSON and send it as the POST body
-        body: JSON.stringify(data)
-      }).then(function(response) {
-        console.log(response)
-        // return response.json();
-      });
-
-}
-
-
-  // React.useEffect(() => {
-  //   if (
-  //     !document
-  //       .getElementById("sliderRegular")
-  //       .classList.contains("noUi-target")
-  //   ) {
-  //     Slider.create(document.getElementById("sliderRegular"), {
-  //       start: [40],
-  //       connect: [true, false],
-  //       step: 1,
-  //       range: { min: 0, max: 100 },
-  //     });
-  //   }
-  //   if (
-  //     !document.getElementById("sliderDouble").classList.contains("noUi-target")
-  //   ) {
-  //     Slider.create(document.getElementById("sliderDouble"), {
-  //       start: [20, 60],
-  //       connect: [false, true, false],
-  //       step: 1,
-  //       range: { min: 0, max: 100 },
-  //     });
-  //   }
-  //   return function cleanup() {};
-  // });
-  // const handleToggle = (value) => {
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   setChecked(newChecked);
-  // };
+  useEffect(() => {
+    setPackages(response.packages_using)
+    console.log(typeof(response.packages_using));
+  }, [response.packages_using])
+  
   return (
     <div className={classes.sections}>
       <div className={classes.container}>
@@ -99,37 +50,120 @@ export default function SectionBasics() {
         </div>
         <div id="buttons">
         <form id="form">
-          User ID:  4567890
+          <b>User ID:</b>  { clientId }
           <br/>
           <br/>
-          Interests: Music
+          <b>District: </b>{response.district}
           <br/>
-          Service Using: Using
+           <b> Age:</b> { response.age }
           <br/>
-          Potential Service:dsfd
+           <b>Average Monthly Bill: </b> Rs { response.average_monthly_bill }
           <br/>
-          <hr/>
-
+          <b>Number of fixed Broadband Accounts</b> { response.number_of_fixed_bb_accounts }
           <br/>
+          <b>Number of IP TV Accounts</b> { response.number_of_iptv_accounts }
           <br/>
-          <h4>Potential Customers</h4>
+          <b>Packages Using: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-            <Button style={{"padding": "30px 100px"}}>Default</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[0] : "Package1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[1] : "Package1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[2] : "Package1" }</Button>
+            </GridItem> 
+          </GridContainer>
+          <hr/>
+          <b>Interests: </b> 
+          <GridContainer>
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[0] : "Interest1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[1] : "Interest2" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[2] : "Interest3" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[3] : "Interest4" }</Button>
+            </GridItem> 
+          </GridContainer>
+          <br/>
+          <hr/>
+          <br/>
+          <b>Services Using: </b> 
+          <GridContainer>
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[0] : "Service1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[1] : "Service2" }</Button>
+            </GridItem> 
+          </GridContainer>
+          <br/>
+          <hr/>
+          <b>Recommended Packages: </b> 
+          <GridContainer>
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[0] : "Package1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[1] : "Package2" }</Button>
+            </GridItem> 
+          </GridContainer>
+          <br/>
+          <hr/>
+          <b>Recommended Services: </b> 
+          <GridContainer>
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[0] : "Package1" }</Button>
+            </GridItem> 
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[1] : "Package2" }</Button>
+            </GridItem> 
+          </GridContainer>
+          <br/>
+          <br/>
+          <h2>Potential Customers</h2>
+          <GridContainer>
+            <GridItem xs={12} sm={4} md={4} lg={3}>
+            <Button style={{"padding": "30px 90px"}}>Chanelling <br/>100</Button>
+            <Button color="primary" style={{"margin":"10px 40px"}}>Promote Service</Button>
             </GridItem>            
             <GridItem xs={12} sm={4} md={4} lg={3}>
-            <Button style={{"padding": "30px 100px"}}>Default</Button>
+            <Button style={{"padding": "30px 100px"}}>Shoping <br/> 4200</Button>
+            <Button color="primary" style={{"margin":"10px 40px"}}>Promote Service</Button>
             </GridItem>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-            <Button style={{"padding": "30px 100px"}}>Default</Button>
+            <Button style={{"padding": "30px 100px"}}>Dining <br/> 2700</Button>
+            <Button color="primary" style={{"margin":"10px 40px"}}>Promote Service</Button>
             </GridItem>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-            <Button style={{"padding": "30px 100px"}}>Default</Button>
+            <Button style={{"padding": "30px 100px"}}>Music <br/> 4600</Button>
+            <Button color="primary" style={{"margin":"10px 40px"}}>Promote Service</Button>
             </GridItem>
           </GridContainer>
-          <input type="submit" value="Submit" />
-
-        </form>
+          <br/>
+          <hr/>
+          </form>
+          <h4>Available Packages</h4>
+          <GridContainer>
+            <GridItem s={12} sm={4} md={4} lg={3}>
+              <h3>Socialmedia 1 - Rs 499</h3>
+              <h6>Unlimited - Valid for 30 days</h6>
+            </GridItem>
+            <GridItem s={12} sm={4} md={4} lg={3}>
+              <h3>Socialmedia 2 - Rs 299</h3>
+              <h6>Unlimited - Valid for 30 days</h6>
+            </GridItem>
+            <GridItem s={12} sm={4} md={4} lg={3}>
+              <h3>Socialmedia 3 - Rs 399</h3>
+              <h6>Unlimited - Valid for 30 days</h6>
+            </GridItem>
+          </GridContainer>
 
 
           {/* <GridContainer justify="center">

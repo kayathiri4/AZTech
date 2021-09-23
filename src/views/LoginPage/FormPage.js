@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-
+import axios from "axios";
 // core components
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
@@ -28,6 +28,9 @@ export default function FormPage(props) {
     const classes = useStyles();
     const [ showError, setShowError ] = useState(false);
     const [ showDashboard, setShowDashboard ] = useState(false);
+    const [ response, setResponse ] = useState("undefined");
+    const [ clientId, setClientId ] = useState(undefined);
+
 
     const { ...rest } = props;
 
@@ -37,14 +40,25 @@ export default function FormPage(props) {
         event.preventDefault();
         setShowDashboard(true);
 
-        const clientId = event.target?.elements?.clientId?.value;
-        // if (clientId === undefined) {
-        //     setShowError(true);
-        //     return;
-        // }
+        const clientId = event.target.elements?.clientId?.value;
         console.log(clientId);
-        const data = {"id":clientId}
+        if (clientId === undefined) {
+            setShowError(true);
+            return;
+        }
 
+        axios.get("/dev/custom").then(res => {
+            console.log(res);
+            const json = JSON.parse(res.data.body);
+            console.log(json);
+            setResponse(json);
+            setClientId(clientId);
+            setShowDashboard(true);
+        }).catch (error => {
+            console.log(error)
+        });
+            
+         
 
         // var request = new XMLHttpRequest();
         // request.onreadystatechange = (e) => {
@@ -62,23 +76,23 @@ export default function FormPage(props) {
         // request.open('GET', 'https://0au5rrtzyi.execute-api.ap-southeast-1.amazonaws.com/dev/customer');
         // request.send();
         
-        fetch('https://0au5rrtzyi.execute-api.ap-southeast-1.amazonaws.com/dev/custom',{
-            mode: 'no-cors',
-            Method: 'GET',
-            header: {
-                'Access-Control-Allow-Origin':'*',
-                'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
-            },
-        })
-        .then(response => {
-            if (response) {
-                // setShowDashboard(true);
-                console.log(response)
-                // return response.json();
-            } else {
-                setShowError(true);
-            }
-        });
+        // fetch('https://0au5rrtzyi.execute-api.ap-southeast-1.amazonaws.com/dev/custom',{
+        //     mode: 'cors',
+        //     method: 'GET',
+        //     header: {
+        //         'Access-Control-Allow-Origin':'*',
+        //         'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
+        //     },
+        // })
+        // .then(response => {
+        //     if (response) {
+        //         // setShowDashboard(true);
+        //         console.log(response)
+        //         // return response.json();
+        //     } else {
+        //         setShowError(true);
+        //     }
+        // });
     }
 
   return (
@@ -155,7 +169,9 @@ export default function FormPage(props) {
         </div> 
         : 
         <Components
-        name = "Welvome"/> 
+            clientId = { clientId }
+            response = { response }
+        /> 
     }
     </div>
   );
