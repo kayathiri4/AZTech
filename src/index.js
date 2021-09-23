@@ -6,7 +6,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import "assets/scss/material-kit-react.scss?v=1.10.0";
 
 // pages for this product
-// import Components from "views/Components/Components.js";
+import Components from "views/Components/Components.js";
 import LandingPage from "views/LandingPage/LandingPage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import ApplicationPage from "views/application/application.js";
@@ -17,7 +17,7 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/landing-page" component={LandingPage} />
-      <Route path="/login-page" component={LoginPage} />
+      <Route path="/form" component={Components} />
       <Route path="/app-page" component={ApplicationPage} />
       <Route path="/" component={LandingPage} />
     </Switch>

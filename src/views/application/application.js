@@ -8,6 +8,7 @@ import classNames from "classnames";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { ArrowDropDownOutlined as MoreHoriz } from "@material-ui/icons";
 
 // @material-ui/icons
 
@@ -23,16 +24,18 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/navbarsStyle.js";
 import LoginPage from "views/LoginPage/LoginPage";
+import FormPage from "views/LoginPage/FormPage";
+import Components from "views/Components/Components";
 
 const useStyles = makeStyles(styles);
 
-export default function Components() {
+export default function Applications() {
   const classes = useStyles();
   const [authenticatedUser, setAuthenticatedUser] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
 
   const [ loginSuccess, setShowLoginSuccess ] =  useState(false);
-  const clientId = "762293579403-97l40lc1o04losrmhqif405jnkkhnugd.apps.googleusercontent.com";
+  const clientId = "762293579403-b6nio50qd78f6flq4ssq2pm5nkblqiig.apps.googleusercontent.com";
 
   useEffect(() => {
       const user = localStorage.getItem("user");
@@ -86,7 +89,20 @@ export default function Components() {
                         Home
                       </Button>
                     </ListItem>
-                    {!authenticatedUser &&
+                    {authenticatedUser 
+                    ?
+                    <ListItem className={classes.listItem}>
+                        <Button
+                          href=""
+                          className={classes.navLink}
+                          style={{"text-transform": "lowercase"}}
+                          onClick={(e) => e.preventDefault()}
+                          color="transparent"
+                        >
+                          {localStorage.getItem("userName")}
+                        </Button>
+                      </ListItem> 
+                    :
                     <ListItem className={classes.listItem}>
                       <Button
                         href=""
@@ -104,13 +120,16 @@ export default function Components() {
                         left
                         caret={false}
                         hoverColor="black"
-                        dropdownHeader={localStorage.getItem("userName")}
+                        // dropdownHeader={localStorage.getItem("userName")}
                         buttonText={
+                          <>
                           <img
                             src={localStorage.getItem("profileUrl")}
                             className={classes.img}
                             alt="profile"
                           />
+                          <MoreHoriz className={classes.icons} />
+                          </>
                         }
                         buttonProps={{
                           className:
@@ -141,9 +160,8 @@ export default function Components() {
                   onLoginSuccess={onLoginSuccess}
                   onFailureSuccess={onFailureSuccess}
                 /> 
-                :<div>
-                    <h2>Login Successful</h2>
-                </div>
+                :
+                <FormPage/>
               }
             </div>
           </div>
