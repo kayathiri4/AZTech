@@ -36,6 +36,28 @@ export default function SectionBasics(props) {
   const [checkedB, setCheckedB] = React.useState(false);
   const [packages, setPackages] = React.useState(undefined);
   const parcels = { 0: "subs"}
+  const labels = ['IT', 'Accounting', 'Human Resource',
+        'Cleaning', 'Security'];
+  const datasets = [
+        {
+            label: 'department',
+            backgroundColor: [
+                '#B21F00',
+                '#C9DE00',
+                '#2FDE00',
+                '#00A6B4',
+                '#6800B4'
+            ],
+            hoverBackgroundColor: [
+                '#501800',
+                '#4B5000',
+                '#175000',
+                '#003350',
+                '#35014F'
+            ],
+            data: [45, 34, 80, 72, 38]
+        }
+    ]
 
   useEffect(() => {
     setPackages(response.packages_using)
@@ -97,7 +119,7 @@ export default function SectionBasics(props) {
           <b>Services Using: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[0] : "OTT subscription" }</Button>
+              <Button style={{"padding": "30px 80px"}}>{ response.services_using ? response.services_using[0] : "OTT subscription" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
               <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[1] : "E-Channeling" }</Button>
@@ -149,7 +171,51 @@ export default function SectionBasics(props) {
           <br/>
           <hr/>
           </form>
-          <h4>Available Packages</h4>
+          <h2>Find Customers</h2>
+          <GridContainer>
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+            <CustomInput
+                required
+                labelText="Location"
+                id="Location"
+                formControlProps={{
+                fullWidth: true,
+                }}
+            />
+              <CustomInput
+                required
+                labelText="Age"
+                id="Age"
+                formControlProps={{
+                fullWidth: true,
+                }}
+            /><CustomInput
+            required
+            labelText="Interest"
+            id="Interest"
+            formControlProps={{
+            fullWidth: true,
+            }}
+        />
+            </GridItem> 
+            <GridItem xs={12} sm={6} md={6} lg={6}>
+              <h4 style={{"margin-left": "30%"}}><b>Potential Customers</b></h4>
+              <h4 style={{"margin-left": "40%"}}><b>1000</b></h4>
+              <br/>
+              <GridContainer>
+              <GridItem xs={12} sm={6} md={6} lg={6}>
+              <Button style={{"padding": "30px 90px"}}>Get Potential <br/>Customer</Button>
+              </GridItem>
+              <GridItem xs={12} sm={6} md={6} lg={6}>
+              <Button style={{"padding": "30px 90px"}}>Promote <br/>Service</Button>
+              </GridItem>
+              </GridContainer>
+            </GridItem> 
+          </GridContainer>
+            <br/>
+            <hr/>
+            <br/>
+          <h2>Available Packages</h2>
           <GridContainer>
             <GridItem s={12} sm={4} md={4} lg={3}>
               <h3>Socialmedia 1 - Rs 499</h3>
@@ -164,532 +230,6 @@ export default function SectionBasics(props) {
               <h6>Unlimited - Valid for 30 days</h6>
             </GridItem>
           </GridContainer>
-
-
-          {/* <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
-              <Button color="primary">Default</Button>
-              <Button color="primary" round>
-                round
-              </Button>
-              <Button color="primary" round>
-                <Favorite className={classes.icons} /> with icon
-              </Button>
-              <Button justIcon round color="primary">
-                <Favorite className={classes.icons} />
-              </Button>
-              <Button color="primary" simple>
-                simple
-              </Button>
-            </GridItem>
-          </GridContainer> */}
-          {/* <div className={classes.title}>
-            <h3>
-              <small>Pick your size</small>
-            </h3>
-          </div> */}
-          {/* <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
-              <Button color="primary" size="sm">
-                Small
-              </Button>
-              <Button color="primary">Regular</Button>
-              <Button color="primary" size="lg">
-                Large
-              </Button>
-            </GridItem>
-          </GridContainer>
-          <div className={classes.title}>
-            <h3>
-              <small>Pick your color</small>
-            </h3>
-          </div>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8}>
-              <Button>Default</Button>
-              <Button color="primary">Primary</Button>
-              <Button color="info">Info</Button>
-              <Button color="success">Success</Button>
-              <Button color="warning">Warning</Button>
-              <Button color="danger">Danger</Button>
-              <Button color="rose">Rose</Button>
-            </GridItem>
-          </GridContainer>
-        </div>
-        <div className={classes.space50} />
-        <div id="inputs">
-          <div className={classes.title}>
-            <h3>Inputs</h3>
-          </div>
-          <GridContainer>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                id="regular"
-                inputProps={{
-                  placeholder: "Regular",
-                }}
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                labelText="With floating label"
-                id="float"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                labelText="Success input"
-                id="success"
-                success
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                labelText="Error input"
-                id="error"
-                error
-                formControlProps={{
-                  fullWidth: true,
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                labelText="With material Icons"
-                id="material"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <People />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={4} md={4} lg={3}>
-              <CustomInput
-                labelText="With Font Awesome Icons"
-                id="font-awesome"
-                formControlProps={{
-                  fullWidth: true,
-                }}
-                inputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <i className="fas fa-users" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </GridItem>
-          </GridContainer>
-        </div>
-        <div className={classes.space70} />
-        <div id="checkRadios">
-          <GridContainer>
-            <GridItem xs={12} sm={6} md={4} lg={3}>
-              <div className={classes.title}>
-                <h3>Checkboxes</h3>
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      tabIndex={-1}
-                      onClick={() => handleToggle(21)}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot,
-                      }}
-                    />
-                  }
-                  classes={{ label: classes.label, root: classes.labelRoot }}
-                  label="Unchecked"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      tabIndex={-1}
-                      onClick={() => handleToggle(22)}
-                      checked={checked.indexOf(22) !== -1 ? true : false}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot,
-                      }}
-                    />
-                  }
-                  classes={{ label: classes.label, root: classes.labelRoot }}
-                  label="Checked"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  disabled
-                  control={
-                    <Checkbox
-                      tabIndex={-1}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    disabled: classes.disabledCheckboxAndRadio,
-                    root: classes.labelRoot,
-                  }}
-                  label="Disabled Unchecked"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  disabled
-                  control={
-                    <Checkbox
-                      tabIndex={-1}
-                      checked={checked.indexOf(24) !== -1 ? true : false}
-                      checkedIcon={<Check className={classes.checkedIcon} />}
-                      icon={<Check className={classes.uncheckedIcon} />}
-                      classes={{
-                        checked: classes.checked,
-                        root: classes.checkRoot,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    disabled: classes.disabledCheckboxAndRadio,
-                    root: classes.labelRoot,
-                  }}
-                  label="Disabled Checked"
-                />
-              </div>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={4} lg={3}>
-              <div className={classes.title}>
-                <h3>Radio Buttons</h3>
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  control={
-                    <Radio
-                      checked={selectedEnabled === "a"}
-                      onChange={() => setSelectedEnabled("a")}
-                      value="a"
-                      name="radio button enabled"
-                      aria-label="A"
-                      icon={
-                        <FiberManualRecord className={classes.radioUnchecked} />
-                      }
-                      checkedIcon={
-                        <FiberManualRecord className={classes.radioChecked} />
-                      }
-                      classes={{
-                        checked: classes.radio,
-                        root: classes.radioRoot,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot,
-                  }}
-                  label="First Radio"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  control={
-                    <Radio
-                      checked={selectedEnabled === "b"}
-                      onChange={() => setSelectedEnabled("b")}
-                      value="b"
-                      name="radio button enabled"
-                      aria-label="B"
-                      icon={
-                        <FiberManualRecord className={classes.radioUnchecked} />
-                      }
-                      checkedIcon={
-                        <FiberManualRecord className={classes.radioChecked} />
-                      }
-                      classes={{
-                        checked: classes.radio,
-                        root: classes.radioRoot,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot,
-                  }}
-                  label="Second Radio"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  disabled
-                  control={
-                    <Radio
-                      checked={false}
-                      value="a"
-                      name="radio button disabled"
-                      aria-label="B"
-                      icon={
-                        <FiberManualRecord className={classes.radioUnchecked} />
-                      }
-                      checkedIcon={
-                        <FiberManualRecord className={classes.radioChecked} />
-                      }
-                      classes={{
-                        checked: classes.radio,
-                        disabled: classes.disabledCheckboxAndRadio,
-                        root: classes.radioRoot,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                    root: classes.labelRoot,
-                  }}
-                  label="Disabled Unchecked Radio"
-                />
-              </div>
-              <div
-                className={
-                  classes.checkboxAndRadio +
-                  " " +
-                  classes.checkboxAndRadioHorizontal
-                }
-              >
-                <FormControlLabel
-                  disabled
-                  control={
-                    <Radio
-                      checked={true}
-                      value="b"
-                      name="radio button disabled"
-                      aria-label="B"
-                      icon={
-                        <FiberManualRecord className={classes.radioUnchecked} />
-                      }
-                      checkedIcon={
-                        <FiberManualRecord className={classes.radioChecked} />
-                      }
-                      classes={{
-                        checked: classes.radio,
-                        disabled: classes.disabledCheckboxAndRadio,
-                        root: classes.radioRoot,
-                      }}
-                    />
-                  }
-                  classes={{ label: classes.label, root: classes.labelRoot }}
-                  label="Disabled Checked Radio"
-                />
-              </div>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={4} lg={3}>
-              <div className={classes.title}>
-                <h3>Toggle Buttons</h3>
-              </div>
-              <div>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={checkedA}
-                      onChange={(event) => setCheckedA(event.target.checked)}
-                      value="checkedA"
-                      classes={{
-                        switchBase: classes.switchBase,
-                        checked: classes.switchChecked,
-                        thumb: classes.switchIcon,
-                        track: classes.switchBar,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                  }}
-                  label="Toggle is on"
-                />
-              </div>
-              <div>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={checkedB}
-                      onChange={(event) => setCheckedB(event.target.checked)}
-                      value="checkedB"
-                      classes={{
-                        switchBase: classes.switchBase,
-                        checked: classes.switchChecked,
-                        thumb: classes.switchIcon,
-                        track: classes.switchBar,
-                      }}
-                    />
-                  }
-                  classes={{
-                    label: classes.label,
-                  }}
-                  label="Toggle is off"
-                />
-              </div>
-            </GridItem>
-          </GridContainer>
-        </div>
-        <div className={classes.space70} />
-        <div id="progress">
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.title}>
-                <h3>Progress Bars</h3>
-              </div>
-              <CustomLinearProgress
-                variant="determinate"
-                color="primary"
-                value={30}
-              />
-              <CustomLinearProgress
-                variant="determinate"
-                color="info"
-                value={60}
-              />
-              <CustomLinearProgress
-                variant="determinate"
-                color="success"
-                value={100}
-                style={{ width: "35%", display: "inline-block" }}
-              />
-              <CustomLinearProgress
-                variant="determinate"
-                color="warning"
-                value={100}
-                style={{ width: "20%", display: "inline-block" }}
-              />
-              <CustomLinearProgress
-                variant="determinate"
-                color="danger"
-                value={25}
-                style={{ width: "45%", display: "inline-block" }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.title}>
-                <h3>Pagination</h3>
-              </div>
-              <Paginations
-                pages={[
-                  { text: 1 },
-                  { text: "..." },
-                  { text: 5 },
-                  { text: 6 },
-                  { active: true, text: 7 },
-                  { text: 8 },
-                  { text: 9 },
-                  { text: "..." },
-                  { text: 12 },
-                ]}
-              />
-              <Paginations
-                pages={[
-                  { text: "PREV" },
-                  { text: 1 },
-                  { text: 2 },
-                  { active: true, text: 3 },
-                  { text: 4 },
-                  { text: 5 },
-                  { text: "NEXT" },
-                ]}
-                color="info"
-              />
-            </GridItem>
-          </GridContainer>
-        </div>
-        <div id="sliders">
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.title}>
-                <h3>Sliders</h3>
-              </div>
-              <div id="sliderRegular" className="slider-primary" />
-              <br />
-              <div id="sliderDouble" className="slider-info" />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={6}>
-              <div className={classes.title}>
-                <h3>Badges</h3>
-              </div>
-              <Badge>default</Badge>
-              <Badge color="primary">primary</Badge>
-              <Badge color="info">info</Badge>
-              <Badge color="success">success</Badge>
-              <Badge color="warning">warning</Badge>
-              <Badge color="danger">danger</Badge>
-              <Badge color="rose">rose</Badge>
-            </GridItem>
-          </GridContainer> */}
         </div>
       </div>
     </div>
