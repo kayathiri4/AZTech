@@ -50,45 +50,45 @@ export default function SectionBasics(props) {
         </div>
         <div id="buttons">
         <form id="form">
-          <b>User ID:</b>  { clientId }
+          <b>User ID:</b>  { clientId ? clientId : "2354678" }
           <br/>
           <br/>
-          <b>District: </b>{response.district}
+          <b>District: </b>{response.district ? response.district : "Matara"}
           <br/>
-           <b> Age:</b> { response.age }
+           <b> Age:</b> { response.age ? response.age : "27"}
           <br/>
-           <b>Average Monthly Bill: </b> Rs { response.average_monthly_bill }
+           <b>Average Monthly Bill: </b> Rs { response.average_monthly_bill? response.average_monthly_bill : "2700" }
           <br/>
-          <b>Number of fixed Broadband Accounts</b> { response.number_of_fixed_bb_accounts }
+          <b>Number of fixed Broadband Accounts</b> { response.number_of_fixed_bb_accounts ?response.number_of_fixed_bb_accounts : "2" }
           <br/>
-          <b>Number of IP TV Accounts</b> { response.number_of_iptv_accounts }
+          <b>Number of IP TV Accounts</b> { response.number_of_iptv_accounts ? response.number_of_iptv_accounts : "0" }
           <br/>
           <b>Packages Using: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[0] : "Package1" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[0] : "WFH package" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[1] : "Package1" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[1] : "OTT package" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[2] : "Package1" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.packages_using ? response.packages_using[2] : "Messenger package" }</Button>
             </GridItem> 
           </GridContainer>
           <hr/>
           <b>Interests: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[0] : "Interest1" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[0] : "Data using" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[1] : "Interest2" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[1] : "E-Channeling" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[2] : "Interest3" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[2] : "OTT usage" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[3] : "Interest4" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.interests ? response.interests[3] : "Video Conference" }</Button>
             </GridItem> 
           </GridContainer>
           <br/>
@@ -97,10 +97,10 @@ export default function SectionBasics(props) {
           <b>Services Using: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[0] : "Service1" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[0] : "OTT subscription" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[1] : "Service2" }</Button>
+              <Button style={{"padding": "30px 90px"}}>{ response.services_using ? response.services_using[1] : "E-Channeling" }</Button>
             </GridItem> 
           </GridContainer>
           <br/>
@@ -108,10 +108,10 @@ export default function SectionBasics(props) {
           <b>Recommended Packages: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[0] : "Package1" }</Button>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[0] : "OTT Package" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[1] : "Package2" }</Button>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_package ? response.recommended_package[1] : "WHF Package" }</Button>
             </GridItem> 
           </GridContainer>
           <br/>
@@ -119,10 +119,10 @@ export default function SectionBasics(props) {
           <b>Recommended Services: </b> 
           <GridContainer>
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[0] : "Package1" }</Button>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[0] : "E-Channeling" }</Button>
             </GridItem> 
             <GridItem xs={12} sm={4} md={4} lg={3}>
-              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[1] : "Package2" }</Button>
+              <Button color="primary" style={{"padding": "30px 90px"}}>{ response.recommended_services ? response.recommended_services[1] : "Music Subcription" }</Button>
             </GridItem> 
           </GridContainer>
           <br/>
