@@ -25,7 +25,7 @@ export default function LoginPage(props) {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
-  const clientId = "762293579403-b6nio50qd78f6flq4ssq2pm5nkblqiig.apps.googleusercontent.com";
+  const clientId = "762293579403-97l40lc1o04losrmhqif405jnkkhnugd.apps.googleusercontent.com";
 
   const { onLoginSuccess, 
           onFailureSuccess,
